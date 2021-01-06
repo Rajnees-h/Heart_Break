@@ -1,5 +1,4 @@
 var startButton = document.querySelector('#startGame');
-var visibleImg = "none";
 var score = 0;
 var visibleTime = 1000;
 
@@ -18,7 +17,7 @@ startButton.addEventListener("click",function(){
 function startGame(){
     startButton.style.display = "none";
     addEventListeners();
-    displayHeart(undefined);
+    displayHeart();
 }
 
 
@@ -33,7 +32,9 @@ for(i=0;i<hearts.length;i++){
 
         updateScore();
 
-        visibleImg = this;
+        this.style.visibility = "hidden";
+        this.src="heart.png";
+
         displayHeart();
     });
 }
@@ -49,18 +50,24 @@ function updateScore(){
 
 }
 function displayHeart(){
-    
 
-    if(visibleImg != "none" ){
-       
-        visibleImg.style.visibility = "hidden";
-        visibleImg.src="heart.png";
-    }
 
     var id = "#heart"+Math.floor(Math.random(0)*12)+"";
 
     var visibleHeart = document.querySelector(id);
     visibleHeart.style.visibility = "visible"
-    
+
+    setTimeout(function(){
+        if(visibleHeart.style.visibility == "visible"){
+            visibleHeart.style.visibility = "hidden";
+            displayHeart();
+            loseOneLife();
+        }
+    }
+    ,--visibleTime);
+
+
+}
+function loseOneLife(){
 
 }
