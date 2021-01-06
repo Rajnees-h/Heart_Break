@@ -39,10 +39,14 @@ for(i=0;i<hearts.length;i++){
 
         updateScore();
 
-        this.style.visibility = "hidden";
-        this.src="heart.png";
+        setTimeout(function(){
+            this.style.visibility = "hidden";
+            this.src="heart.png";
+            displayHeart();
+        },10);
+        
 
-        displayHeart();
+        
     });
 }
 
@@ -77,7 +81,7 @@ function displayHeart(){
     }
 
     setTimeout(function(){
-        if(visibleHeart.style.visibility == "visible"){
+        if(visibleHeart.src == "heart.png"){
             visibleHeart.style.visibility = "hidden";
             if(loseOneLife()){
                 displayHeart();
