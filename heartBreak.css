@@ -1,0 +1,14 @@
+#score{
+    width: 30%;
+  margin : 0 , auto;
+  color : green;
+  float:left;
+
+}
+#lifes{
+    width: auto;
+    margin : 0 , auto;
+    color : red;
+    float:right;
+
+  }
