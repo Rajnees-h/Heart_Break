@@ -1,7 +1,7 @@
 var startButton = document.querySelector('#startGame');
 var newGame = document.querySelector("#newGame");
 var score = 0;
-var visibleTime = 1000;
+var visibleTime = 2000;
 var totalLife = 5;
 
 
@@ -63,8 +63,10 @@ function displayHeart(){
 
     var visibleHeart = document.querySelector(id);
     visibleHeart.style.visibility = "visible";
-
-    if(visibleTime > 600){
+    if(visibleTime > 1000){
+        visibleTime -= 50;
+    }
+    else if(visibleTime > 600){
         visibleTime -= 4;
     }else if(visibleTime > 300){
         visibleTime -= 3;
