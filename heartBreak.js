@@ -1,18 +1,24 @@
 var startButton = document.querySelector('#startGame');
+var newGame = document.querySelector("#newGame");
 var score = 0;
-var visibleTime = 1000;
+var visibleTime = 2000;
 var totalLife = 5;
 
 
+
 startButton.addEventListener("click",function(){
-    
+   
     var page = document.querySelector("#main");
    
-   document.querySelector(".body").style.backgroundColor = "#27AE60";
+  
 
     startGame();
 
 
+});
+
+newGame.addEventListener("click",function(){
+    location.reload();
 });
 
 function startGame(){
@@ -61,8 +67,10 @@ function displayHeart(){
     setTimeout(function(){
         if(visibleHeart.style.visibility == "visible"){
             visibleHeart.style.visibility = "hidden";
-            displayHeart();
-            loseOneLife();
+            if(loseOneLife()){
+                displayHeart();
+            }
+            
         }
     }
     ,--visibleTime);
@@ -71,10 +79,7 @@ function displayHeart(){
 }
 function loseOneLife(){
 
-    if(totalLife === 1){
-        alert("GameOver");
-        return;
-    }
+
 totalLife--;
 var lifeLabel = document.querySelector("#lifes");
 
@@ -85,5 +90,11 @@ for(i=0;i<totalLife;i++){
 }
 
 lifeLabel.innerHTML = code;
+if(totalLife === 0){
+    lifeLabel.innerHTML = "Game Over";
+    newGame.style.display = "block";
+    return false;
+}
+return true;
 
 }
