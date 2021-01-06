@@ -1,7 +1,7 @@
 var startButton = document.querySelector('#startGame');
 var newGame = document.querySelector("#newGame");
 var score = 0;
-var visibleTime = 2000;
+var visibleTime = 1000;
 var totalLife = 5;
 
 
@@ -62,7 +62,17 @@ function displayHeart(){
     var id = "#heart"+Math.floor(Math.random(0)*12)+"";
 
     var visibleHeart = document.querySelector(id);
-    visibleHeart.style.visibility = "visible"
+    visibleHeart.style.visibility = "visible";
+
+    if(visibleTime > 600){
+        visibleTime -= 4;
+    }else if(visibleTime > 300){
+        visibleTime -= 3;
+    }else if(visibleTime > 100){
+        visibleTime -= 2; 
+    }else {
+        visibleTime -= 1;
+    }
 
     setTimeout(function(){
         if(visibleHeart.style.visibility == "visible"){
@@ -73,7 +83,7 @@ function displayHeart(){
             
         }
     }
-    ,--visibleTime);
+    ,visibleTime);
 
 
 }
