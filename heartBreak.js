@@ -1,6 +1,7 @@
 var startButton = document.querySelector('#startGame');
 var score = 0;
 var visibleTime = 1000;
+var totalLife = 5;
 
 
 startButton.addEventListener("click",function(){
@@ -69,5 +70,20 @@ function displayHeart(){
 
 }
 function loseOneLife(){
+
+    if(totalLife === 1){
+        alert("GameOver");
+        return;
+    }
+totalLife--;
+var lifeLabel = document.querySelector("#lifes");
+
+var code = "";
+
+for(i=0;i<totalLife;i++){
+    code += '<span class="glyphicon glyphicon-heart"></span>';
+}
+
+lifeLabel.innerHTML = code;
 
 }
