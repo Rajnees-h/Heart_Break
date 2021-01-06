@@ -1,16 +1,17 @@
 var startButton = document.querySelector('#startGame');
 var newGame = document.querySelector("#newGame");
+var lifeLabel = document.querySelector("#lifes")
 var score = 0;
 var visibleTime = 2000;
 var totalLife = 5;
+
+var clicked = false;
 
 
 
 startButton.addEventListener("click",function(){
    
     var page = document.querySelector("#main");
-   
-  
 
     startGame();
 
@@ -34,18 +35,23 @@ function addEventListeners(){
 
 for(i=0;i<hearts.length;i++){
     hearts[i].addEventListener("click",function(){
+        clicked = true;
         this.src="heart_break.png";
+    
 
 
         updateScore();
+       
 
-        setTimeout(function(){
-            this.style.visibility = "hidden";
-            this.src="heart.png";
-            displayHeart();
+        setTimeout(function(){   
+            if(totalLife > 0){
+                displayHeart(); 
+            }   
+                 
         },10);
         
-
+        
+        
         
     });
 }
@@ -62,6 +68,12 @@ function updateScore(){
 }
 function displayHeart(){
 
+    clicked = false;
+    var allHearts = document.querySelectorAll("img");
+    for(j=0;j<allHearts.length;j++){
+        allHearts[j].style.visibility = "hidden";
+        allHearts[j].src = "heart.png";
+    }
 
     var id = "#heart"+Math.floor(Math.random(0)*12)+"";
 
@@ -81,10 +93,16 @@ function displayHeart(){
     }
 
     setTimeout(function(){
-        if(visibleHeart.src == "heart.png"){
+       
+        var st = visibleHeart.src;
+    
+        if(!clicked && st.substring(st.length-9,st.length) == "heart.png"){
             visibleHeart.style.visibility = "hidden";
             if(loseOneLife()){
                 displayHeart();
+            }else{
+                lifeLabel.innerHTML = "Game Over";
+                newGame.style.display = "block";
             }
             
         }
@@ -97,7 +115,6 @@ function loseOneLife(){
 
 
 totalLife--;
-var lifeLabel = document.querySelector("#lifes");
 
 var code = "";
 
@@ -107,8 +124,7 @@ for(i=0;i<totalLife;i++){
 
 lifeLabel.innerHTML = code;
 if(totalLife === 0){
-    lifeLabel.innerHTML = "Game Over";
-    newGame.style.display = "block";
+
     return false;
 }
 return true;
